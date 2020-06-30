@@ -11,15 +11,15 @@ static const int swallowfloating    = 0;        /* 1 means swallow floating wind
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10", "JoyPixels:pixelsize=30:antialias=true:autohint=true"  };
-static char dmenufont[]             = "monospace:size=10";
-static char normbgcolor[]           = "#222222";
+static const char *fonts[]          = { "JetBrains Mono:size=10", "JoyPixels:pixelsize=30:antialias=true:autohint=true"  };
+static char dmenufont[]             = "JetBrains Mono:size=10";
+static char normbgcolor[]           = "#3c3836";
 static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
+static char normfgcolor[]           = "#ebdbb2";
+static char selfgcolor[]            = "#282828";
 static char selbordercolor[]        = "#770000";
-static char selbgcolor[]            = "#005577";
-static char urgbgcolor[]            = "#FF0000";
+static char selbgcolor[]            = "#a89984";
+static char urgbgcolor[]            = "#cc241d";
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -112,7 +112,8 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
-	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("") }, */
+	{ MODKEY,			XK_Escape,	spawn,	SHCMD("i3lock --blur 10 --clock") },
+	{ MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("i3lock --blur 10 --clock && systemctl suspend") },
 	{ MODKEY,			XK_grave,	spawn,	SHCMD("dmenuunicode") },
 	/* { MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") }, */
 	TAGKEYS(			XK_1,		0)
@@ -138,11 +139,11 @@ static Key keys[] = {
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		SHCMD("sysact") },
 	{ MODKEY,			XK_w,		spawn,		SHCMD("$BROWSER") },
-	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD("st -e sudo nmtui") },
+	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD("kitty -e sudo nmtui") },
 	{ MODKEY,			XK_e,		spawn,		SHCMD("st -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD("st -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
-	{ MODKEY,			XK_r,		spawn,		SHCMD("st -e lf") },
-	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD("st -e htop") },
+	{ MODKEY,			XK_r,		spawn,		SHCMD("kitty -e ranger") },
+	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD("kitty -e htop") },
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
 	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
@@ -167,7 +168,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_s,		togglesticky,	{0} },
 	/* { MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_d,		spawn,          SHCMD("rofi -combi-modi window,drun,ssh,run -show combi -modi combi") },
-	/* { MODKEY,			XK_d,		spawn,		SHCMD("") } }, */
+	{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("~/.config/rofi/rofi-remmina") },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
 	{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
@@ -258,8 +259,8 @@ static Key keys[] = {
 	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOff,	spawn,		SHCMD("synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOn,		spawn,		SHCMD("synclient TouchpadOff=0") },
-	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 15") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 15") },
+	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("light -A 5") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("light -U 5") },
 
 	/* { MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } }, */
 	/* { MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } }, */
