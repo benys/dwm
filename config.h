@@ -57,7 +57,9 @@ static const Rule rules[] = {
 	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           1,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
 	{ NULL,       NULL,       "Microsoft Teams Notification",0, 1,         0,         0,        -1 },
-	{ "KeePassXC",NULL,       NULL,             1 << 7,       0,           0,         0,        -1 },
+	{ NULL,       NULL,       "Powiadomienie w aplikacji Microsoft Teams",0,1,0,      0,        -1 },
+	{ NULL,       NULL,       "| Microsoft Teams", 1<<6,      0,           0,         0,        -1 },
+	{ "KeePassXC",NULL,       NULL,             1 << 7,       0,           0,         0,        -1 },   
 	{ NULL,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
 	{ NULL,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1 },
 };
