@@ -52,16 +52,19 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	*/
-	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
-	{ "Gimp",     NULL,       NULL,       	    1 << 8,       0,           0,         0,        -1 },
-	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           1,         0,        -1 },
-	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
-	{ NULL,       NULL,       "Microsoft Teams Notification",0, 1,         0,         0,        -1 },
-	{ NULL,       NULL,       "Powiadomienie w aplikacji Microsoft Teams",0,1,0,      0,        -1 },
-	{ NULL,       NULL,       "| Microsoft Teams", 1<<6,      0,           0,         0,        -1 },
-	{ "KeePassXC",NULL,       NULL,             1 << 7,       0,           0,         0,        -1 },   
-	{ NULL,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
-	{ NULL,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1 },
+	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor	ignoretransient*/
+	{ "Gimp",     NULL,       NULL,       	    1 << 8,       0,           0,         0,        -1,		0 },
+	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           1,         0,        -1,		0  },
+	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1,		0  },
+	{ NULL,       NULL,       "Microsoft Teams Notification",0, 1,         0,         0,        -1,		0  },
+	{ NULL,       NULL,       "Powiadomienie w aplikacji Microsoft Teams",0,1,0,      0,        -1,		0  },
+	{ NULL,       NULL,       "| Microsoft Teams", 1<<6,      0,           0,         0,        -1,		0  },
+	{ "KeePassXC",NULL,       NULL,             1 << 7,       0,           0,         0,        -1,		0  },   
+	{ NULL,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1,		0  },
+	{ NULL,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1,		0  },
+	{ "jetbrains-webstorm",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
+	{ "jetbrains-rider",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
+	{ "jetbrains-studio",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
 };
 
 /* layout(s) */
@@ -233,7 +236,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
-	{ 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
+	{ 0,				XK_Print,	spawn,		SHCMD("flameshot gui") },
 	{ ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") },
 	{ MODKEY,			XK_Print,	spawn,		SHCMD("dmenurecord") },
 	{ MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("dmenurecord kill") },
