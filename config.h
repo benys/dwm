@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Constants */
-#define TERMINAL "kitty"
-#define TERMCLASS "Kitty"
+#define TERMINAL "alacritty"
+#define TERMCLASS "Alacritty"
 
 /* appearance */
 static unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -65,6 +65,7 @@ static const Rule rules[] = {
 	{ "jetbrains-webstorm",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
 	{ "jetbrains-rider",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
 	{ "jetbrains-studio",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
+	{ "Microsoft Word",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
 };
 
 /* layout(s) */
@@ -202,7 +203,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_s,		togglesticky,	{0} },
 	/* { MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_d,		spawn,          SHCMD("rofi -combi-modi window,drun,ssh,run -show combi -modi combi") },
-	{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("~/.config/rofi/rofi-remmina") },
+	//{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("~/.config/rofi/rofi-remmina") },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
 	{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
