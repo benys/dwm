@@ -2,7 +2,7 @@
 
 /* Constants */
 #define TERMINAL "alacritty"
-#define TERMCLASS "alacritty"
+#define TERMCLASS "Alacritty"
 #define BROWSER "qutebrowser"
 
 /* appearance */
