@@ -1,9 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Constants */
-#define TERMINAL "st"
-#define TERMCLASS "St"
-#define BROWSER "librewolf"
+#define TERMINAL "alacritty"
+#define TERMCLASS "Alacritty"
+#define BROWSER "qutebrowser"
 
 /* appearance */
 static unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -67,6 +67,7 @@ static const Rule rules[] = {
 	{ "jetbrains-webstorm",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
 	{ "jetbrains-rider",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
 	{ "jetbrains-studio",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
+	{ "Microsoft Word",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
 };
 
 /* layout(s) */
@@ -203,7 +204,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_s,		togglesticky,	{0} },
 	/* { MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_d,		spawn,          SHCMD("rofi -combi-modi window,drun,ssh,run -show combi -modi combi") },
-	{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("~/.config/rofi/rofi-remmina") },
+	//{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("~/.config/rofi/rofi-remmina") },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
 	{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
@@ -263,19 +264,11 @@ static Key keys[] = {
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
-<<<<<<< HEAD
-	{ 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
-	{ ShiftMask,			XK_Print,	spawn,		{.v = (const char*[]){ "maimpick", NULL } } },
-	{ MODKEY,			XK_Print,	spawn,		{.v = (const char*[]){ "dmenurecord", NULL } } },
-	{ MODKEY|ShiftMask,		XK_Print,	spawn,		{.v = (const char*[]){ "dmenurecord", "kill", NULL } } },
-	{ MODKEY,			XK_Delete,	spawn,		{.v = (const char*[]){ "dmenurecord", "kill", NULL } } },
-=======
 	{ 0,				XK_Print,	spawn,		SHCMD("flameshot gui") },
 	{ ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") },
 	{ MODKEY,			XK_Print,	spawn,		SHCMD("dmenurecord") },
 	{ MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("dmenurecord kill") },
 	{ MODKEY,			XK_Delete,	spawn,		SHCMD("dmenurecord kill") },
->>>>>>> 8a52946 (apply patch from https://www.reddit.com/r/suckless/comments/k67tso/dwm_webstormjetbrains_webstorm_window_becomes/)
 	{ MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
