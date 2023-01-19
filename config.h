@@ -21,14 +21,14 @@ static char *fonts[]          = { "monospace:size=10", "NotoColorEmoji:pixelsize
 
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
+static char normfgcolor[]           = "#ebdbb2";
+static char selfgcolor[]            = "#282828";
 static char selbordercolor[]        = "#770000";
-static char selbgcolor[]            = "#005577";
-static char urgbgcolor[]            = "#FF0000";
+static char selbgcolor[]            = "#a89984";
+static char urgbgcolor[]            = "#cc241d";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor }, 
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
        [SchemeUrgN]  = { urgbgcolor,  normbgcolor,  normbordercolor  },
        [SchemeUrgS]  = { urgbgcolor,  selbgcolor,  selbordercolor  },
@@ -142,8 +142,9 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
-	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("") }, */
-	{ MODKEY,			XK_grave,	spawn,	{.v = (const char*[]){ "dmenuunicode", NULL } } },
+	{ MODKEY,			XK_Escape,	spawn,	SHCMD("i3lock --blur 10 --clock") },
+	{ MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("i3lock --blur 10 --clock && systemctl suspend") },
+	{ MODKEY,			XK_grave,	spawn,	SHCMD("dmenuunicode") },
 	/* { MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") }, */
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
@@ -197,7 +198,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_s,		togglesticky,	{0} },
 	/* { MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_d,		spawn,          SHCMD("rofi -combi-modi window,drun,ssh,run -show combi -modi combi") },
-	/* { MODKEY,			XK_d,		spawn,		SHCMD("") } }, */
+	{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("~/.config/rofi/rofi-remmina") },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
 	{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
