@@ -54,16 +54,19 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	*/
-	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
-	{ "Gimp",     NULL,       NULL,       	    1 << 8,       0,           0,         0,        -1 },
-	{ TERMCLASS,  NULL,       NULL,       	    0,            0,           1,         0,        -1 },
-	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
-	{ NULL,       NULL,       "Microsoft Teams Notification",0, 1,         0,         0,        -1 },
-	{ NULL,       NULL,       "Powiadomienie w aplikacji Microsoft Teams",0,1,0,      0,        -1 },
-	{ NULL,       NULL,       "| Microsoft Teams", 1<<6,      0,           0,         0,        -1 },
-	{ "KeePassXC",NULL,       NULL,             1 << 7,       0,           0,         0,        -1 },   
-	{ NULL,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
-	{ NULL,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1 },
+	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor	ignoretransient*/
+	{ "Gimp",     NULL,       NULL,       	    1 << 8,       0,           0,         0,        -1,		0 },
+	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           1,         0,        -1,		0  },
+	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1,		0  },
+	{ NULL,       NULL,       "Microsoft Teams Notification",0, 1,         0,         0,        -1,		0  },
+	{ NULL,       NULL,       "Powiadomienie w aplikacji Microsoft Teams",0,1,0,      0,        -1,		0  },
+	{ NULL,       NULL,       "| Microsoft Teams", 1<<6,      0,           0,         0,        -1,		0  },
+	{ "KeePassXC",NULL,       NULL,             1 << 7,       0,           0,         0,        -1,		0  },   
+	{ NULL,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1,		0  },
+	{ NULL,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1,		0  },
+	{ "jetbrains-webstorm",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
+	{ "jetbrains-rider",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
+	{ "jetbrains-studio",     NULL,       NULL,       	    0,       0,           0,         0,        -1,		1 },
 };
 
 /* layout(s) */
@@ -260,11 +263,19 @@ static Key keys[] = {
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
+<<<<<<< HEAD
 	{ 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
 	{ ShiftMask,			XK_Print,	spawn,		{.v = (const char*[]){ "maimpick", NULL } } },
 	{ MODKEY,			XK_Print,	spawn,		{.v = (const char*[]){ "dmenurecord", NULL } } },
 	{ MODKEY|ShiftMask,		XK_Print,	spawn,		{.v = (const char*[]){ "dmenurecord", "kill", NULL } } },
 	{ MODKEY,			XK_Delete,	spawn,		{.v = (const char*[]){ "dmenurecord", "kill", NULL } } },
+=======
+	{ 0,				XK_Print,	spawn,		SHCMD("flameshot gui") },
+	{ ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") },
+	{ MODKEY,			XK_Print,	spawn,		SHCMD("dmenurecord") },
+	{ MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("dmenurecord kill") },
+	{ MODKEY,			XK_Delete,	spawn,		SHCMD("dmenurecord kill") },
+>>>>>>> 8a52946 (apply patch from https://www.reddit.com/r/suckless/comments/k67tso/dwm_webstormjetbrains_webstorm_window_becomes/)
 	{ MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
