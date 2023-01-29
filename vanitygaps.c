@@ -1,3 +1,4 @@
+#include <stdio.h>
 /* Key binding functions */
 static void defaultgaps(const Arg *arg);
 static void incrgaps(const Arg *arg);
@@ -162,19 +163,22 @@ void
 getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr)
 {
 	unsigned int n;
-	float mfacts, sfacts;
+	float mfacts = 0, sfacts = 0;
 	int mtotal = 0, stotal = 0;
 	Client *c;
 
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	mfacts = MIN(n, m->nmaster);
-	sfacts = n - m->nmaster;
+	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) {
+		if (n < m->nmaster)
+			mfacts += c->cfact;
+		else
+			sfacts += c->cfact;
+	}
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++)
 		if (n < m->nmaster)
-			mtotal += msize / mfacts;
+			mtotal += c->cfact * msize / mfacts;
 		else
-			stotal += ssize / sfacts;
+			stotal += c->cfact * ssize / sfacts;
 
 	*mf = mfacts; // total factor of master area
 	*sf = sfacts; // total factor of stack area
@@ -508,6 +512,8 @@ spiral(Monitor *m)
  * Default tile layout + gaps
  */
 
+//FILE *log = NULL;
+
 static void
 tile(Monitor *m)
 {
@@ -525,6 +531,10 @@ tile(Monitor *m)
 	if (n == 0)
 		return;
 
+	//if (!log && !(log = fopen("/tmp/dwm.log", "a"))) {
+	//	/* The file couldn't be opened; handle this error. */
+	//}
+
 	sx = mx = m->wx + ov;
 	sy = my = m->wy + oh;
 	mh = m->wh - 2*oh - ih * (MIN(n, m->nmaster) - 1);
@@ -538,13 +548,17 @@ tile(Monitor *m)
 	}
 
 	getfacts(m, mh, sh, &mfacts, &sfacts, &mrest, &srest);
+	//fprintf(log, "tile mh: %d sh: %d mfacts: %.2f sfacts: %.2f srects %d\n", mh, sh, mfacts, sfacts, srest);
 
 	for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
-			resize(c, mx, my, mw - (2*c->bw), (mh / mfacts) + (i < mrest ? 1 : 0) - (2*c->bw), 0);
+			resize(c, mx, my, mw - (2*c->bw), (c->cfact * mh / mfacts) + (i < mrest ? 1 : 0) - (2*c->bw), 0);
+			//fprintf(log, "\tname: %-60s cfacts: %.2f h: %d %d\n", c-> name, c->cfact, (int)(c->cfact * mh / mfacts), (i < mrest ? 1 : 0));
 			my += HEIGHT(c) + ih;
 		} else {
-			resize(c, sx, sy, sw - (2*c->bw), (sh / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), 0);
+			resize(c, sx, sy, sw - (2*c->bw), (c->cfact * sh / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), 0);
+			//fprintf(log, "\tname: %-60s cfacts: %.2f h: %d %d\n", c-> name, c->cfact, (int)(c->cfact * sh / sfacts), ((i - m->nmaster) < srest ? 1 : 0));
 			sy += HEIGHT(c) + ih;
 		}
+	//fflush(log);
 }
