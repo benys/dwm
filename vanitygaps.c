@@ -140,16 +140,30 @@ incrgaps(const Arg *arg)
 /* 	); */
 /* } */
 
+static int
+has4kmonitor(void)
+{
+	Monitor *m;
+
+	for (m = mons; m; m = m->next) {
+		/* Check if any monitor has 4K resolution (3840x2160 or higher) */
+		if (m->mw >= 3840 || m->mh >= 2160)
+			return 1;
+	}
+	return 0;
+}
+
 static void
 getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc)
 {
 	unsigned int n, oe, ie;
 	oe = ie = enablegaps;
 	Client *c;
+  unsigned int has4kmon = has4kmonitor();
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if (smartgaps && n == 1) {
-		oe = 0; // outer gaps disabled when only one client
+	if (smartgaps && n == 1 && !has4kmon) {
+		oe = 0; // outer gaps disabled when only one client or has not 4k monitor
 	}
 
 	*oh = m->gappoh*oe; // outer horizontal gap
